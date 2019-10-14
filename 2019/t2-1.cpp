@@ -44,7 +44,7 @@ int main()
         cout << "find !" << endl;
         break;
     case 2:
-        cout << "don't find,this elemt"<<"("<< elemt << ")"<<" has inserted into list!"<<endl;
+        cout << "don't find,then this elemt"<<"("<< elemt << ")"<<" inserted into list!"<<endl;
         count++;
         break;
     default:
