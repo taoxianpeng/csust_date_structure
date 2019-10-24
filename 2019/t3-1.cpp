@@ -1,18 +1,21 @@
 #include <iostream>
+#include <cstdio>
 #define MAXSIZE 100
 using namespace std;
 
 
 typedef struct Stack{
-    int top=-1;
+    int top;
     int elemt[MAXSIZE];
 }Stack;
 
-void InitStack(Stack *stack){
-    stack = new Stack();
+void InitStack(Stack &stack){
+    stack.top = -1;
 }
 bool isEmpty(Stack s){
-    if(s.top < 0) return true; else return false;
+    if (s.top > -1)
+        return  false;
+    return true;
 }
 int Pop(Stack *s){
     int data;
@@ -26,7 +29,6 @@ int Pop(Stack *s){
 int Push(Stack *s, int data){
     if(s->top<MAXSIZE-1){
         s->elemt[++s->top]=data;
-        cout << s->top << endl;
         return 1;
     }
     return 0;
@@ -36,28 +38,20 @@ int main()
 {
     Stack s;
     int num;
-    int info;
-    InitStack(&s);
-    while(cin >> num){
-        info = Push(&s,num);
-        switch (info)
-        {
-        case 0:
-            cout << "stack is full !" << endl;
-            break;
-        case 1:
-            cout << s.elemt[s.top] <<" data was pushed !" << endl;
-        default:
-            break;
-        }
-        if(cin.get()=='\n') break;
+    int res;
+    const int EOS=8;
+    InitStack(s);
+    cin >> num;
+    while(num){
+        Push(&s,num%EOS);
+        num /= EOS;
     }
-    while (s.top > -1)
-    {
+    while(!isEmpty(s)){
         cout << Pop(&s);
-        if(s.top!=-1) cout << " ";
     }
+    cout <<"\n";
+   
 
-    
+    getchar();    
     return 0;
 }
