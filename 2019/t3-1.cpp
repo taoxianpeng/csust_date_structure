@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdio>
 #define MAXSIZE 100
 using namespace std;
 
@@ -13,16 +12,16 @@ void InitStack(Stack &stack)
 {
     stack.top = -1;
 }
-bool isEmpty(Stack s)
+bool isEmpty(Stack *s)
 {
-    if (s.top > -1)
+    if (s->top > -1)
         return false;
     return true;
 }
 int Pop(Stack *s)
 {
     int data;
-    if (s->top > -1)
+    if (isEmpty(s))
     {
         data = s->elemt[s->top];
         s->top--;
@@ -30,34 +29,37 @@ int Pop(Stack *s)
     }
     return -1;
 }
-int Push(Stack *s, int data)
+void Push(Stack *s, int data)
 {
     if (s->top < MAXSIZE - 1)
     {
         s->elemt[++s->top] = data;
-        return 1;
     }
-    return 0;
+}
+void tenToEight(int num,Stack *s){
+    // num表示的每次除以8后的商
+    // 最后结束的条件是商为0
+    // 将每次 除以8的余数 入栈
+    while (num)
+    {
+        Push(s,num%8);
+        num/=8;
+    }
+    
 }
 int main()
 {
     Stack s;
     int num;
-    int res;
-    const int EOS = 8;
     InitStack(s);
     cin >> num;
-    while (num)
-    {
-        Push(&s, num % EOS);
-        num /= EOS;
-    }
-    while (!isEmpty(s))
+    tenToEight(num,&s);
+    while (!isEmpty(&s))
     {
         cout << Pop(&s);
     }
     cout << "\n";
 
-    getchar();
+    cin >> num;
     return 0;
 }

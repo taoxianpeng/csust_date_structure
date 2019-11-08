@@ -71,6 +71,7 @@ int main(){
     
     
     /*code*/
-    
+    string num;
+    cin >> num;
     return 0;
 }
