@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 #include <queue>
 #define Elemtype char
 using namespace std;
@@ -55,16 +54,37 @@ int gethight(BTree *s){
     int Rh = gethight(s->rchild);
     return Lh>Rh?Lh+1:Rh+1;
 }
+
+int getWeight(BTree *s){
+    int result=0;
+    queue<BTree *> que;
+    que.push(s);
+    while(!que.empty()){
+        int count = que.size();
+        result = max(count,result);
+        while(count--){
+            BTree *temp = que.front();
+            que.pop();
+            if(temp->lchild)
+                que.push(temp->lchild);
+            if(temp->rchild)
+                que.push(temp->rchild);
+        }
+    }
+    return result;
+}
 int main()
 {
-    Elemtype st[100] = {'1','2','3','4','5','6','7','8'};
-    int size = 8;
+    Elemtype st[100] = {'1','2','3','4','5','6','7','8','9','x'};
+    int size = 10;
     BTree *s=new BTree();
     level_creatBTree(s,st,size);
     pre_visit(s);
     cout << '\n';
     int h = gethight(s);
+    int w = getWeight(s);
     cout << "max hight of btree is: " << h << endl;
+    cout << "max weight of btree is: " << w << endl;
 
     return 0;
 }
