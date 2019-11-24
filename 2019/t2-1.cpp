@@ -16,7 +16,12 @@ int Find(int *list,int length, int num){
             left = mid+1;
     }
     if(mid!=-1){
-        if(list[mid]>num) 
+        if(list[mid]>num)
+        /*若最终mid位置的数字比查找数字大
+          则最终插入的位置在mid的位置上
+          若是~小
+          则插入到mid的后面也就是mid+1的位置
+        */ 
             insert_pos=mid;
         else
             insert_pos=mid+1;                
