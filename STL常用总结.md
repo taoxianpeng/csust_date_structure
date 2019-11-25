@@ -24,6 +24,7 @@ int main()
     cout << "vector holds: ";
     for (auto&& i : numbers) cout << quoted(i) << ' ';
     cout << "\nMoved-from string holds " << quoted(s) << '\n';
+}
 ```
 ```
 输出：
